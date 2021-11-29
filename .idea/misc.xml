@@ -4,6 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Androiding/ProjectCodes/SleepyDriver/app/src/main/res/layout/activity_detector.xml" value="0.2" />
+        <entry key="..\:/Androiding/ProjectCodes/SleepyDriver/app/src/main/res/layout/activity_driver_face_detection.xml" value="0.2" />
+        <entry key="..\:/Androiding/ProjectCodes/SleepyDriver/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Androiding/ProjectCodes/SleepyDriver/app/src/main/res/layout/activity_recieve.xml" value="0.2" />
+        <entry key="..\:/Androiding/ProjectCodes/SleepyDriver/app/src/main/res/layout/activity_register_choice.xml" value="0.2" />
+        <entry key="..\:/Androiding/ProjectCodes/SleepyDriver/app/src/main/res/layout/activity_setup.xml" value="0.1" />
       </map>
     </option>
   </component>

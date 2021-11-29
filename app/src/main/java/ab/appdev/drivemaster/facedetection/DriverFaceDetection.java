@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -31,6 +33,7 @@ import java.io.IOException;
 
 import ab.appdev.drivemaster.Configurable;
 import ab.appdev.drivemaster.R;
+import ab.appdev.drivemaster.SetupActivity;
 
 
 public final class DriverFaceDetection extends AppCompatActivity {
@@ -48,6 +51,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
 
     private static final int RC_HANDLE_CAMERA_PERM = 2;
     public int flag = 0;
+    private SharedPreferences sharedpreferences;
 
 
     @Override
@@ -66,9 +70,8 @@ public final class DriverFaceDetection extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Volume is MUTE", Toast.LENGTH_LONG).show();
         }
 
-        detectionDelay = Configurable.getDetectionDelayInMilliseconds(
-                Integer.parseInt(
-                        getIntent().getStringExtra(Configurable.SENSITIVITY)));
+
+        sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
 
 
         View decorview = getWindow().getDecorView(); //hide navigation bar
@@ -82,6 +85,18 @@ public final class DriverFaceDetection extends AppCompatActivity {
         } else {
             requestCameraPermission();
         }
+    }
+
+    public void onOpenSetup(View v) {
+        startActivity(new Intent(getApplicationContext(), SetupActivity.class));
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        detectionDelay = Configurable.getDetectionDelayInMilliseconds(
+                Integer.parseInt(
+                        sharedpreferences.getString(Configurable.SENSITIVITY, "0")));
     }
 
     private void requestCameraPermission() {
@@ -235,7 +250,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
             AlertDialog dig;
             dig = new AlertDialog.Builder(DriverFaceDetection.this)
                     .setTitle("Drowsy Alert !!!")
-                    .setMessage("Tracker suspects that the driver is experiencing Drowsiness, Touch OK to Stop the Alarm")
+                    .setMessage("Tracker suspects that the driver is experiencing Drowsiness, Touch OK to Stop the Alarm\nSENSITIVITY: " + detectionDelay + "ms")
                     .setPositiveButton(android.R.string.yes, (dialog, which) -> {
                         stop_playing();
                         flag = 0;

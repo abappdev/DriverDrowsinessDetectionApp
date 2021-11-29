@@ -7,6 +7,17 @@
     android:background="@color/backgroundColor"
     tools:context=".facedetection.DriverFaceDetection">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:onClick="onOpenSetup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/set" />
+
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"
         android:layout_height="400dp"
