@@ -56,7 +56,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
     public int flag = 0;
     private SharedPreferences sharedpreferences;
 
-    private static boolean isNightModeOn =false;
+    private static boolean isNightModeOn = false;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -260,7 +260,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
             AlertDialog dig;
             dig = new AlertDialog.Builder(DriverFaceDetection.this)
                     .setTitle("Drowsy Alert !!!")
-                    .setMessage("Tracker suspects that the driver is experiencing Drowsiness, Touch OK to Stop the Alarm\nSENSITIVITY: " + detectionDelay/1000 + " seconds")
+                    .setMessage("Tracker suspects that the driver is experiencing Drowsiness, Touch OK to Stop the Alarm\nSENSITIVITY: " + detectionDelay / 1000 + " seconds")
                     .setPositiveButton(android.R.string.yes, (dialog, which) -> {
                         stop_playing();
                         flag = 0;
@@ -277,7 +277,8 @@ public final class DriverFaceDetection extends AppCompatActivity {
 
     public void nightSwitch(View view) {
         isNightModeOn = !isNightModeOn;
-        CamCarder.setVisibility(isNightModeOn?View.VISIBLE:View.GONE);
+        CamCarder.setVisibility(isNightModeOn ? View.VISIBLE : View.GONE);
+        Toast.makeText(getApplicationContext(), "Night Mode Switched", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -346,7 +347,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
                 stop = System.currentTimeMillis();
             } else if (state_i == 0 && state_f == 0) {
                 begin = System.currentTimeMillis();
-                FirebaseDatabase.getInstance().getReference("/abhishek/").child("INFO").setValue(""+begin);
+                FirebaseDatabase.getInstance().getReference("/abhishek/").child("INFO").setValue("" + begin);
 
                 if (begin - stop > detectionDelay) {
                     c = incrementer();
