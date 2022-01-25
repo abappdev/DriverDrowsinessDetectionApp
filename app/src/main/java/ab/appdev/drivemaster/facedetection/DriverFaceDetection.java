@@ -255,7 +255,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
             AlertDialog dig;
             dig = new AlertDialog.Builder(DriverFaceDetection.this)
                     .setTitle("Drowsy Alert !!!")
-                    .setMessage("Tracker suspects that the driver is experiencing Drowsiness, Touch OK to Stop the Alarm\nSENSITIVITY: " + detectionDelay + "ms")
+                    .setMessage("Tracker suspects that the driver is experiencing Drowsiness, Touch OK to Stop the Alarm\nSENSITIVITY: " + detectionDelay/1000 + " seconds")
                     .setPositiveButton(android.R.string.yes, (dialog, which) -> {
                         stop_playing();
                         flag = 0;
