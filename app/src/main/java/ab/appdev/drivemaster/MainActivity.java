@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import ab.appdev.drivemaster.facedetection.DriverFaceDetection;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
+
+        FirebaseDatabase.getInstance().getReference("/abhishek/").child("INFO").setValue("STARTED");
 
         Intent i = new Intent(getApplicationContext(), DriverFaceDetection.class);
 

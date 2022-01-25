@@ -28,6 +28,7 @@ import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 
@@ -247,6 +248,10 @@ public final class DriverFaceDetection extends AppCompatActivity {
         play_media();
         runOnUiThread(() -> {
             play_media();
+
+            FirebaseDatabase.getInstance().getReference("/abhishek/").child("INFO").setValue("DETECTED");
+
+
             AlertDialog dig;
             dig = new AlertDialog.Builder(DriverFaceDetection.this)
                     .setTitle("Drowsy Alert !!!")
@@ -331,6 +336,8 @@ public final class DriverFaceDetection extends AppCompatActivity {
                 stop = System.currentTimeMillis();
             } else if (state_i == 0 && state_f == 0) {
                 begin = System.currentTimeMillis();
+                FirebaseDatabase.getInstance().getReference("/abhishek/").child("INFO").setValue(""+begin);
+
                 if (begin - stop > detectionDelay) {
                     c = incrementer();
                     alert_box();
