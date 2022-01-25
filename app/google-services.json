@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "29814369844",
+    "firebase_url": "https://driverdrowse-default-rtdb.firebaseio.com",
+    "project_id": "driverdrowse",
+    "storage_bucket": "driverdrowse.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29814369844:android:0610e93485f0e21e7d2461",
+        "android_client_info": {
+          "package_name": "ab.appdev.drivemaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29814369844-ejog6r1jiiq31h9kqt6m7msoe44l2i89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9raL8tq7mGjtjKQR-JZJoD776dKowbuI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29814369844-ejog6r1jiiq31h9kqt6m7msoe44l2i89.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
