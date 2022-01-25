@@ -20,7 +20,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"
         android:layout_height="400dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,8 +31,7 @@
             android:id="@+id/preview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:visibility="visible">
+            android:layout_gravity="center">
 
             <ab.appdev.drivemaster.facedetection.GraphicOverlay
                 android:id="@+id/faceOverlay"
