@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,8 +36,15 @@ public class MainActivity extends AppCompatActivity {
         i.putExtra(Configurable.SENSITIVITY, sharedpreferences.getString(Configurable.SENSITIVITY, "0"));
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        startActivity(i);
-        finish();
+
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(() -> {
+            startActivity(i);
+            finish();        //Do something after 100ms
+        }, 1000);
+
+
+
 
     }
 }
