@@ -18,9 +18,9 @@
         app:srcCompat="@drawable/set" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/camcarder"
         android:layout_width="300dp"
         android:layout_height="400dp"
-        android:visibility="visible"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,5 +40,16 @@
 
         </ab.appdev.drivemaster.facedetection.CameraSourcePreview>
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/camcardview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:onClick="nightSwitch"
+        android:text="Button"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

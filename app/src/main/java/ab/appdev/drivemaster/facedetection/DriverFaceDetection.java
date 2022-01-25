@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -40,6 +41,7 @@ import ab.appdev.drivemaster.SetupActivity;
 public final class DriverFaceDetection extends AppCompatActivity {
 
     private CameraSource mCameraSource = null;
+    private CardView CamCarder = null;
 
     static int count = 0, count1 = 0;
 
@@ -54,6 +56,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
     public int flag = 0;
     private SharedPreferences sharedpreferences;
 
+    private static boolean isNightModeOn =false;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -61,6 +64,8 @@ public final class DriverFaceDetection extends AppCompatActivity {
         setContentView(R.layout.activity_driver_face_detection);
         mPreview = findViewById(R.id.preview);
         mGraphicOverlay = findViewById(R.id.faceOverlay);
+
+        CamCarder = findViewById(R.id.camcarder);
 
         mPreview.setVisibility(View.VISIBLE);
 
@@ -268,6 +273,11 @@ public final class DriverFaceDetection extends AppCompatActivity {
         });
 
 
+    }
+
+    public void nightSwitch(View view) {
+        isNightModeOn = !isNightModeOn;
+        CamCarder.setVisibility(isNightModeOn?View.VISIBLE:View.GONE);
     }
 
 
