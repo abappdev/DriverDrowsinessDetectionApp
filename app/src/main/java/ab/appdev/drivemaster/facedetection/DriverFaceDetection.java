@@ -14,6 +14,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.io.IOException;
 
 import ab.appdev.drivemaster.Configurable;
+import ab.appdev.drivemaster.Information;
 import ab.appdev.drivemaster.R;
 import ab.appdev.drivemaster.SetupActivity;
 
@@ -57,16 +59,25 @@ public final class DriverFaceDetection extends AppCompatActivity {
     private SharedPreferences sharedpreferences;
 
     private static boolean isNightModeOn = false;
+    static Information information;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.activity_driver_face_detection);
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        if (isNightModeOn) {
+            WindowManager.LayoutParams layout = getWindow().getAttributes();
+            layout.screenBrightness = 1F;
+            getWindow().setAttributes(layout);
+        }
+
+
         mPreview = findViewById(R.id.preview);
         mGraphicOverlay = findViewById(R.id.faceOverlay);
-
         CamCarder = findViewById(R.id.camcarder);
-
         mPreview.setVisibility(View.VISIBLE);
 
 
@@ -254,8 +265,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
         runOnUiThread(() -> {
             play_media();
 
-            FirebaseDatabase.getInstance().getReference("/abhishek/").child("INFO").setValue("DETECTED");
-
+            FirebaseDatabase.getInstance().getReference("/" + information.getBroadcastId() + "/").child("INFO").setValue("Drowsy Alert");
 
             AlertDialog dig;
             dig = new AlertDialog.Builder(DriverFaceDetection.this)
@@ -347,7 +357,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
                 stop = System.currentTimeMillis();
             } else if (state_i == 0 && state_f == 0) {
                 begin = System.currentTimeMillis();
-                FirebaseDatabase.getInstance().getReference("/abhishek/").child("INFO").setValue("" + begin);
+                FirebaseDatabase.getInstance().getReference("/" + information.getBroadcastId() + "/").child("INFO").setValue("" + begin);
 
                 if (begin - stop > detectionDelay) {
                     c = incrementer();

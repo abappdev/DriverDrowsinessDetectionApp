@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private SharedPreferences sharedpreferences;
+    static Information information = new Information();
 
 
     @Override
@@ -26,11 +27,17 @@ public class MainActivity extends AppCompatActivity {
 
         sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
 
-        FirebaseDatabase.getInstance().getReference("/abhishek/").child("INFO").setValue("STARTED");
+        if (sharedpreferences.getString("BroadcastID", "").equals(""))
+            sharedpreferences.edit().putString("BroadcastID", "12234354657685").apply();
+
+        information.setBroadcastId(sharedpreferences.getString("BroadcastID", ""));
+        // information.setBroadcastId("ABHIRAO");
+
+        FirebaseDatabase.getInstance().getReference("/" + information.getBroadcastId() + "/").child("INFO").setValue("STARTED");
 
         Intent i = new Intent(getApplicationContext(), DriverFaceDetection.class);
 
-        if(sharedpreferences.getString(Configurable.SENSITIVITY, "").equals(""))
+        if (sharedpreferences.getString(Configurable.SENSITIVITY, "").equals(""))
             sharedpreferences.edit().putString(Configurable.SENSITIVITY, "5").apply();
 
         i.putExtra(Configurable.SENSITIVITY, sharedpreferences.getString(Configurable.SENSITIVITY, "0"));
@@ -42,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
             finish();        //Do something after 100ms
         }, 1000);
-
-
 
 
     }
