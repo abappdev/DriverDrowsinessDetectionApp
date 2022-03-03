@@ -49,7 +49,12 @@ public class RecieverActivity extends AppCompatActivity {
 
                 // after getting the value we are setting
                 // our value to our text view in below line.
-                info.setText(Objects.requireNonNull(snapshot.child("INFO").getValue()).toString());
+                info.setText(Objects.requireNonNull(snapshot.child("Safe").getValue()).toString());
+
+                if(Objects.requireNonNull(snapshot.child("INFO").getValue()).toString().equals("000000000000")){
+                    info.setText(Objects.requireNonNull(snapshot.child("WARNING").getValue()).toString());
+                }
+
             }
 
             @Override

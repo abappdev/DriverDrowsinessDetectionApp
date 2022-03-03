@@ -265,7 +265,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
         runOnUiThread(() -> {
             play_media();
 
-            FirebaseDatabase.getInstance().getReference("/" + information.getBroadcastId() + "/").child("INFO").setValue("Drowsy Alert");
+            FirebaseDatabase.getInstance().getReference("/" + information.getBroadcastId() + "/").child("INFO").setValue("00000000000000");
 
             AlertDialog dig;
             dig = new AlertDialog.Builder(DriverFaceDetection.this)
