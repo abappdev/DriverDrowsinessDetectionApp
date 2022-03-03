@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         if (sharedpreferences.getString("BroadcastID", "").equals("")) {
-            sharedpreferences.edit().putString("BroadcastID", AESUtils.encrypt("ABAPPDEVSERVICESCAN"+AESUtils.sizedString(30))).apply();
+            sharedpreferences.edit().putString("BroadcastID", AESUtils.encrypt("trusttext"+AESUtils.sizedString(30))).apply();
         }
 
         if (sharedpreferences.getString(Configurable.SENSITIVITY, "").equals(""))
@@ -48,6 +48,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (sharedpreferences.getString("RGR", "").equals("SEND")) {
             Intent i = new Intent(getApplicationContext(), DriverFaceDetection.class);
+            i.putExtra(Configurable.SENSITIVITY, sharedpreferences.getString(Configurable.SENSITIVITY, "0"));
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            final Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(() -> {
+                startActivity(i);
+                finish();        //Do something after 100ms
+            }, 1000);
+        }else{
+            Intent i = new Intent(getApplicationContext(), SetupActivity.class);
             i.putExtra(Configurable.SENSITIVITY, sharedpreferences.getString(Configurable.SENSITIVITY, "0"));
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             final Handler handler = new Handler(Looper.getMainLooper());
