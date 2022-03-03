@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         if (sharedpreferences.getString("BroadcastID", "").equals("")) {
-            sharedpreferences.edit().putString("BroadcastID","ABAPPDEVSERVICESCAN"+ AESUtils.encrypt(AESUtils.sizedString(30))).apply();
+            sharedpreferences.edit().putString("BroadcastID", AESUtils.encrypt("ABAPPDEVSERVICESCAN"+AESUtils.sizedString(30))).apply();
         }
 
         if (sharedpreferences.getString(Configurable.SENSITIVITY, "").equals(""))
@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         information.setBroadcastId(AESUtils.decrypt(sharedpreferences.getString("BroadcastID", "")));
-
-
         FirebaseDatabase.getInstance().getReference("/" + information.getBroadcastId() + "/").child("INFO").setValue("STARTED");
 
 

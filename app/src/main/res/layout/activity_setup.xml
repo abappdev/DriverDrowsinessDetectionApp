@@ -116,7 +116,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="50dp"
-        android:text="Dual Reporting QR"
+        android:text="Multicast QR"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
