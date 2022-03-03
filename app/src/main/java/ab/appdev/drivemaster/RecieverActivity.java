@@ -29,7 +29,7 @@ public class RecieverActivity extends AppCompatActivity {
     // Database Reference for Firebase.
     DatabaseReference databaseReference;
     TextView info;
-    private SharedPreferences sharedpreferences;
+     SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
