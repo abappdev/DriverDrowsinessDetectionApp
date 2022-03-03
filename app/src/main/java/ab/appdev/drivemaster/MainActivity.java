@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     static Information information = new Information();
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();        //Do something after 100ms
             }, 1000);
         }else{
-            Intent i = new Intent(getApplicationContext(), SetupActivity.class);
-            i.putExtra(Configurable.SENSITIVITY, sharedpreferences.getString(Configurable.SENSITIVITY, "0"));
+            Intent i = new Intent(getApplicationContext(), RecieverActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             final Handler handler = new Handler(Looper.getMainLooper());
             handler.postDelayed(() -> {

@@ -41,7 +41,6 @@ public class AESUtils {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public static String encrypt(String strToEncrypt )
     {
         try
@@ -58,7 +57,6 @@ public class AESUtils {
         return null;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public static String decrypt(String strToDecrypt)
     {
         try
@@ -75,7 +73,6 @@ public class AESUtils {
         return null;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public static String sizedString(int length) {
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'

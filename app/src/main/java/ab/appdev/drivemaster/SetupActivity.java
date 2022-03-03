@@ -141,6 +141,7 @@ public class SetupActivity extends AppCompatActivity {
 
                 try {
 
+
                     if (Objects.requireNonNull(AESUtils.decrypt(data)).toLowerCase().contains("trusttext") && !sharedpreferences.getString("BroadcastID", "").equals(data)) {
 
                         //if (Objects.requireNonNull(AESUtils.decrypt(data)).toLowerCase().contains("trusttext")) {

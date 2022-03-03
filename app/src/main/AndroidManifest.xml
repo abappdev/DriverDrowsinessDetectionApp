@@ -3,7 +3,7 @@
     package="ab.appdev.drivemaster">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SleepyDriver">
+        <activity
+            android:name=".RecieverActivity"
+            android:exported="false" />
         <activity
             android:name=".SetupActivity"
             android:exported="false" />
