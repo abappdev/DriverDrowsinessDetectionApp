@@ -30,8 +30,12 @@ public class MainActivity extends AppCompatActivity {
 
         sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
 
+        if (sharedpreferences.getString("RGR", "").equals("")) {
+            sharedpreferences.edit().putString("RGR", "SEND").apply();
+
+        }
         if (sharedpreferences.getString("BroadcastID", "").equals("")) {
-            sharedpreferences.edit().putString("BroadcastID", AESUtils.encrypt(AESUtils.sizedString(30))).apply();
+            sharedpreferences.edit().putString("BroadcastID","ABAPPDEVSERVICESCAN"+ AESUtils.encrypt(AESUtils.sizedString(30))).apply();
         }
 
         if (sharedpreferences.getString(Configurable.SENSITIVITY, "").equals(""))
@@ -43,17 +47,17 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseDatabase.getInstance().getReference("/" + information.getBroadcastId() + "/").child("INFO").setValue("STARTED");
 
-        Intent i = new Intent(getApplicationContext(), DriverFaceDetection.class);
 
-
-        i.putExtra(Configurable.SENSITIVITY, sharedpreferences.getString(Configurable.SENSITIVITY, "0"));
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        final Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(() -> {
-            startActivity(i);
-            finish();        //Do something after 100ms
-        }, 1000);
-
+        if (sharedpreferences.getString("RGR", "").equals("SEND")) {
+            Intent i = new Intent(getApplicationContext(), DriverFaceDetection.class);
+            i.putExtra(Configurable.SENSITIVITY, sharedpreferences.getString(Configurable.SENSITIVITY, "0"));
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            final Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(() -> {
+                startActivity(i);
+                finish();        //Do something after 100ms
+            }, 1000);
+        }
 
     }
 }

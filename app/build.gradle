@@ -35,5 +35,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
    // implementation 'com.google.android.gms:play-services:12.0.1'
+    implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.3'
+
 
 }
