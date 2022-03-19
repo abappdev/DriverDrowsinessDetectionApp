@@ -13,16 +13,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SleepyDriver">
         <activity
-            android:name=".RecieverActivity"
+            android:name=".QRScanActivity"
             android:exported="false" />
         <activity
-            android:name=".SetupActivity"
+            android:name=".QRShowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModePickerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SecondaryDeviceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetectionSetupActivity"
             android:exported="false" />
         <activity
             android:name=".facedetection.DriverFaceDetection"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".StartupActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -37,7 +37,7 @@ import java.io.IOException;
 import ab.appdev.drivemaster.Configurable;
 import ab.appdev.drivemaster.Information;
 import ab.appdev.drivemaster.R;
-import ab.appdev.drivemaster.SetupActivity;
+import ab.appdev.drivemaster.DetectionSetupActivity;
 
 
 public final class DriverFaceDetection extends AppCompatActivity {
@@ -105,7 +105,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
     }
 
     public void onOpenSetup(View v) {
-        startActivity(new Intent(getApplicationContext(), SetupActivity.class));
+        startActivity(new Intent(getApplicationContext(), DetectionSetupActivity.class));
     }
 
     @Override

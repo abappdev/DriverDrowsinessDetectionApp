@@ -19,9 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
-import ab.appdev.drivemaster.facedetection.DriverFaceDetection;
-
-public class RecieverActivity extends AppCompatActivity {
+public class SecondaryDeviceActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     static Information information = new Information();
 
@@ -66,7 +64,7 @@ public class RecieverActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 // calling on cancelled method when we receive
                 // any error or we are not able to get the data.
-                Toast.makeText(RecieverActivity.this, "Fail to get data.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SecondaryDeviceActivity.this, "Fail to get data.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -96,7 +94,7 @@ public class RecieverActivity extends AppCompatActivity {
             play_media();
 
             AlertDialog dig;
-            dig = new AlertDialog.Builder(RecieverActivity.this)
+            dig = new AlertDialog.Builder(SecondaryDeviceActivity.this)
                     .setTitle("Drowsy Alert !!!")
                     .setMessage("Tracker suspects that the driver is experiencing Drowsiness")
                     .setPositiveButton(android.R.string.yes, (dialog, which) -> {
