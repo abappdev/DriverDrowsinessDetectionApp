@@ -1,10 +1,6 @@
 package ab.appdev.drivemaster;
 
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -33,10 +29,7 @@ public class AESUtils {
             key = Arrays.copyOf(key, 16);
             secretKey = new SecretKeySpec(key, "AES");
         }
-        catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        catch (UnsupportedEncodingException e) {
+        catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
@@ -76,15 +69,12 @@ public class AESUtils {
     public static String sizedString(int length) {
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
-        int targetStringLength = length;
         Random random = new Random();
 
-        String generatedString = random.ints(leftLimit, rightLimit + 1)
-                .limit(targetStringLength)
+        return(random.ints(leftLimit, rightLimit + 1)
+                .limit(length)
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                .toString();
-
-        return(generatedString);
+                .toString());
     }
 
 }
