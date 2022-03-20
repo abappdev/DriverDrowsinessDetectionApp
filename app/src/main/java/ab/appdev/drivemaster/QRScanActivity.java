@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -88,6 +89,17 @@ public class QRScanActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(getApplicationContext(), ModePickerActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         ZXDecoder decoder = new ZXDecoder();
@@ -145,11 +157,15 @@ public class QRScanActivity extends AppCompatActivity {
         builder.setMessage("Are you sure?");
 
         builder.setPositiveButton("YES", (dialog, which) -> {
-            sharedpreferences.edit().putString("RGR", "RCV").apply();
+            sharedpreferences.edit().putString("RGR", "RECEIVER").apply();
             sharedpreferences.edit().putString("BroadcastID", data).apply();
             information.setBroadcastId(AESUtils.decrypt(sharedpreferences.getString("BroadcastID", "")));
             dialog.dismiss();
 
+            Intent intent = new Intent(getApplicationContext(), StartupActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
 
         });
 
