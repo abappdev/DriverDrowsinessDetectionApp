@@ -10,6 +10,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
@@ -31,7 +32,7 @@ public class QRShowActivity extends AppCompatActivity {
         setContentView(R.layout.activity_qrshow);
 
         qrCodeIV = findViewById(R.id.idIVQrcode);
-        sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
+        sharedpreferences = getSharedPreferences(Configurable.SHAREDNAME, Context.MODE_PRIVATE);
 
         WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
 
@@ -54,7 +55,7 @@ public class QRShowActivity extends AppCompatActivity {
 
         // setting this dimensions inside our qr code
         // encoder to generate our qr code.
-        qrgEncoder = new QRGEncoder(sharedpreferences.getString("BroadcastID", ""), null, QRGContents.Type.TEXT, dimen);
+        qrgEncoder = new QRGEncoder(sharedpreferences.getString(Configurable.BRODCASTID, ""), null, QRGContents.Type.TEXT, dimen);
         try {
             // getting our qrcode in the form of bitmap.
             bitmap = qrgEncoder.encodeAsBitmap();
@@ -72,10 +73,31 @@ public class QRShowActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        Intent intent = new Intent(getApplicationContext(), ModePickerActivity.class);
+        Intent intent = new Intent(getApplicationContext(), StartupActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
 
+    }
+
+    public void senderOn(View view) {
+
+
+        sharedpreferences.edit().putString(Configurable.APPMODE, Configurable.SENDER).apply();
+        Information.setBroadcastId(AESUtils.decrypt(sharedpreferences.getString(Configurable.BRODCASTID, "")));
+
+
+        Intent intent = new Intent(getApplicationContext(), StartupActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+
+    }
+
+    public void goBack(View view) {
+        Intent intent = new Intent(getApplicationContext(), StartupActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 }

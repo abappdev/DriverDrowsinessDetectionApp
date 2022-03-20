@@ -1,6 +1,7 @@
 package ab.appdev.drivemaster;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -9,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -38,14 +40,11 @@ public class DetectionSetupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setup);
 
 
-
         sensitivityBar = findViewById(R.id.sensitivityBar);
         sensitivityShowingLabel = findViewById(R.id.sensitivity);
 
-        sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
-        sensitivityShowingLabel.setText(sharedpreferences.getString(Configurable.SENSITIVITY, "5"));
-
-
+        sharedpreferences = getSharedPreferences(Configurable.SHAREDNAME, Context.MODE_PRIVATE);
+        sensitivityShowingLabel.setText(sharedpreferences.getString(Configurable.SENSITIVITY, Configurable.DEFAULT_SENSITIVITY));
 
 
         sensitivityBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -79,12 +78,10 @@ public class DetectionSetupActivity extends AppCompatActivity {
 
             }
         });
-        sensitivityBar.setProgress(Integer.parseInt(sharedpreferences.getString(Configurable.SENSITIVITY, "5")));
-
+        sensitivityBar.setProgress(Integer.parseInt(sharedpreferences.getString(Configurable.SENSITIVITY, Configurable.DEFAULT_SENSITIVITY)));
 
 
         qrCodeIV = findViewById(R.id.idIVQrcode);
-        sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
 
         WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
 
@@ -107,7 +104,7 @@ public class DetectionSetupActivity extends AppCompatActivity {
 
         // setting this dimensions inside our qr code
         // encoder to generate our qr code.
-        qrgEncoder = new QRGEncoder(sharedpreferences.getString("BroadcastID", ""), null, QRGContents.Type.TEXT, dimen);
+        qrgEncoder = new QRGEncoder(sharedpreferences.getString(Configurable.BRODCASTID, ""), null, QRGContents.Type.TEXT, dimen);
         try {
             // getting our qrcode in the form of bitmap.
             bitmap = qrgEncoder.encodeAsBitmap();
@@ -123,4 +120,13 @@ public class DetectionSetupActivity extends AppCompatActivity {
     }
 
 
+    public void deRegister(View view) {
+        sharedpreferences.edit().putString(Configurable.BRODCASTID, AESUtils.encrypt("trusttext" + AESUtils.sizedString(30))).apply();
+        sharedpreferences.edit().putString(Configurable.APPMODE, "").apply();
+        Intent intent = new Intent(getApplicationContext(), StartupActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        finishAffinity();
+        startActivity(intent);
+        finish();
+    }
 }

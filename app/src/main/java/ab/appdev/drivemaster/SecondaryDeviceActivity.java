@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,26 +24,25 @@ import java.util.Objects;
 
 public class SecondaryDeviceActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
-    static Information information = new Information();
 
     // creating a variable for our
     // Database Reference for Firebase.
     DatabaseReference databaseReference;
     TextView info;
-     SharedPreferences sharedpreferences;
+    SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reciever);
-        sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
+        info = findViewById(R.id.info);
 
+        sharedpreferences = getSharedPreferences(Configurable.SHAREDNAME, Context.MODE_PRIVATE);
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         // below line is used to get
         // reference for our database.
-        databaseReference = firebaseDatabase.getReference("/" + information.getBroadcastId() + "/");
-        info = findViewById(R.id.info);
+        databaseReference = firebaseDatabase.getReference("/" + Information.getBroadcastId() + "/");
         info.setText("Hello");
 
 
@@ -49,14 +51,28 @@ public class SecondaryDeviceActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
 
+                try {
+
+                    switch (Objects.requireNonNull(snapshot.child("INFO").getValue()).toString()) {
+                        case "00000000000000":
+                            info.setText("WARNING");
+                            alert_box();
+                            break;
+                        case "STARTED":
+                            info.setText("STARTED");
+                            break;
+                        default:
+                            info.setText("UNDER DETECTION MODE");
+
+                    }
+                } catch (Exception E) {
+                    Toast.makeText(SecondaryDeviceActivity.this, "Fail to get data.", Toast.LENGTH_SHORT).show();
+
+                }
+
                 // after getting the value we are setting
                 // our value to our text view in below line.
-                info.setText(Objects.requireNonNull(snapshot.child("INFO").getValue()).toString());
 
-                if(Objects.requireNonNull(snapshot.child("INFO").getValue()).toString().equals("00000000000000")){
-                    info.setText("WARNING");
-                alert_box();
-                }
 
             }
 
@@ -107,8 +123,16 @@ public class SecondaryDeviceActivity extends AppCompatActivity {
         });
 
 
-
     }
 
+    public void deRegister(View view) {
+        //  sharedpreferences.edit().putString("BroadcastID", AESUtils.encrypt("trusttext" + AESUtils.sizedString(30))).apply();
+        sharedpreferences.edit().putString(Configurable.APPMODE, "").apply();
+        Intent intent = new Intent(getApplicationContext(), StartupActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        finishAffinity();
+        startActivity(intent);
+        finish();
+    }
 
 }

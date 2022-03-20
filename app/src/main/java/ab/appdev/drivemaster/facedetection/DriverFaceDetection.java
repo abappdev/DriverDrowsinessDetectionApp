@@ -36,6 +36,7 @@ import java.io.IOException;
 
 import ab.appdev.drivemaster.Configurable;
 import ab.appdev.drivemaster.Information;
+import ab.appdev.drivemaster.QRShowActivity;
 import ab.appdev.drivemaster.R;
 import ab.appdev.drivemaster.DetectionSetupActivity;
 
@@ -289,6 +290,14 @@ public final class DriverFaceDetection extends AppCompatActivity {
         isNightModeOn = !isNightModeOn;
         CamCarder.setVisibility(isNightModeOn ? View.VISIBLE : View.GONE);
         Toast.makeText(getApplicationContext(), "Night Mode Switched", Toast.LENGTH_SHORT).show();
+    }
+
+    public void showQR(View view) {
+        Intent intent = new Intent(getApplicationContext(), QRShowActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        finishAffinity();
+        startActivity(intent);
+        finish();
     }
 
 

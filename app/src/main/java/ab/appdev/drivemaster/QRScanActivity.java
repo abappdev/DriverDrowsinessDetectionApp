@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import eu.livotov.labs.android.camview.ScannerLiveView;
@@ -33,7 +34,7 @@ public class QRScanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrscan);
-        sharedpreferences = getSharedPreferences("MyPREFERENCES", Context.MODE_PRIVATE);
+        sharedpreferences = getSharedPreferences(Configurable.SHAREDNAME, Context.MODE_PRIVATE);
 
         if (checkPermission()) {
             // if permission is already granted display a toast message
@@ -73,7 +74,7 @@ public class QRScanActivity extends AppCompatActivity {
                 try {
 
 
-                    if (Objects.requireNonNull(AESUtils.decrypt(data)).toLowerCase().contains("trusttext") && !sharedpreferences.getString("BroadcastID", "").equals(data)) {
+                    if (Objects.requireNonNull(AESUtils.decrypt(data)).toLowerCase().contains("trusttext") && !sharedpreferences.getString(Configurable.BRODCASTID, "").equals(data)) {
 
                         //if (Objects.requireNonNull(AESUtils.decrypt(data)).toLowerCase().contains("trusttext")) {
                         goDialog(data);
@@ -92,11 +93,17 @@ public class QRScanActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        Intent intent = new Intent(getApplicationContext(), ModePickerActivity.class);
+        Intent intent = new Intent(getApplicationContext(), StartupActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
 
+    }
+    public void goBack(View view) {
+        Intent intent = new Intent(getApplicationContext(), StartupActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -157,9 +164,9 @@ public class QRScanActivity extends AppCompatActivity {
         builder.setMessage("Are you sure?");
 
         builder.setPositiveButton("YES", (dialog, which) -> {
-            sharedpreferences.edit().putString("RGR", "RECEIVER").apply();
-            sharedpreferences.edit().putString("BroadcastID", data).apply();
-            information.setBroadcastId(AESUtils.decrypt(sharedpreferences.getString("BroadcastID", "")));
+            sharedpreferences.edit().putString(Configurable.APPMODE, "RECEIVER").apply();
+            sharedpreferences.edit().putString(Configurable.BRODCASTID, data).apply();
+            Information.setBroadcastId(AESUtils.decrypt(sharedpreferences.getString(Configurable.BRODCASTID, "")));
             dialog.dismiss();
 
             Intent intent = new Intent(getApplicationContext(), StartupActivity.class);
