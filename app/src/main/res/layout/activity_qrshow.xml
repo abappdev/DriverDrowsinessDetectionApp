@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:onClick="senderOn"
         android:padding="10dp"
-        android:text="Continue"
+        android:text="CONTINUE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

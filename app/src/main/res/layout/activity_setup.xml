@@ -92,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="35dp"
         android:text="Sensitivity"
         android:textColor="@android:color/black"
         android:textSize="20sp"
@@ -104,7 +104,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="35dp"
         android:text="Multicast QR"
         android:textColor="@android:color/black"
         android:textSize="20sp"
@@ -128,13 +128,13 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
         android:backgroundTint="@android:color/holo_red_dark"
         android:backgroundTintMode="multiply"
         android:onClick="deRegister"
         android:text="Deregister"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView5" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idIVQrcode" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
