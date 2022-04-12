@@ -11,7 +11,10 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -84,6 +87,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
 
         final AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         int c = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+
         if (c == 0) {
             Toast.makeText(getApplicationContext(), "Volume is MUTE", Toast.LENGTH_LONG).show();
         }
@@ -103,6 +107,15 @@ public final class DriverFaceDetection extends AppCompatActivity {
         } else {
             requestCameraPermission();
         }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.System.canWrite(this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                intent.setData(Uri.parse("package:" + getPackageName()));
+                startActivity(intent);
+            }
+        }
+
     }
 
     public void onOpenSetup(View v) {
@@ -251,6 +264,15 @@ public final class DriverFaceDetection extends AppCompatActivity {
         stop_playing();
         mp = MediaPlayer.create(this, R.raw.alarm);
         mp.start();
+
+        AudioManager audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+
+        audioManager.setStreamVolume(
+                AudioManager.STREAM_MUSIC,
+                audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
+                AudioManager.FLAG_SHOW_UI
+        );
+
     }
 
     public void stop_playing() {
@@ -290,6 +312,10 @@ public final class DriverFaceDetection extends AppCompatActivity {
         isNightModeOn = !isNightModeOn;
         CamCarder.setVisibility(isNightModeOn ? View.VISIBLE : View.GONE);
         Toast.makeText(getApplicationContext(), "Night Mode Switched", Toast.LENGTH_SHORT).show();
+
+        Settings.System.putInt(getApplicationContext().getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 255);
+
+
     }
 
     public void showQR(View view) {
@@ -386,6 +412,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
 
         finish();
     }
+
 
 
 }
