@@ -9,8 +9,8 @@
 
     <eu.livotov.labs.android.camview.ScannerLiveView
         android:id="@+id/camview"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_margin="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView9"
@@ -22,7 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Scan eyesense QR Code"
+        android:fontFamily="@font/comfortaa_bold"
+        android:text="EyeSense Detection QR Scan"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/camview"

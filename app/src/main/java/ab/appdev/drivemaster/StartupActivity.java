@@ -55,7 +55,7 @@ public class StartupActivity extends AppCompatActivity {
         handler.postDelayed(() -> {
             startActivity(intent);
             finish();        //Do something after 100ms
-        }, 1000);
+        }, 100);
 
     }
 }

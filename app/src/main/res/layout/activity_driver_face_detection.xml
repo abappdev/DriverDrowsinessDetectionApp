@@ -10,6 +10,7 @@
         android:id="@+id/camcarder"
         android:layout_width="300dp"
         android:layout_height="400dp"
+        android:layout_margin="30dp"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,40 +31,29 @@
         </ab.appdev.drivemaster.facedetection.CameraSourcePreview>
     </androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="30dp"
+        android:onClick="onOpenSetup"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_menu"
+        app:tint="@android:color/black" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:onClick="showQR"
-            android:text="eyesense-QR" />
-
-        <Button
-            android:id="@+id/camcardview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:onClick="nightSwitch"
-            android:text="NIGHT MODE" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:layout_marginEnd="24dp"
-            android:onClick="onOpenSetup"
-            app:srcCompat="@drawable/ic_menu"
-            app:tint="@android:color/black" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/nightModeBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/blue_curve_button"
+        android:onClick="nightSwitch"
+        android:padding="10dp"
+        android:text="Night Mode is OFF"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

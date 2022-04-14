@@ -9,11 +9,14 @@
         <entry key="..\:/Androiding/ProjectCodes/SleepyDriver/app/src/main/res/layout/activity_recieve.xml" value="0.2" />
         <entry key="..\:/Androiding/ProjectCodes/SleepyDriver/app/src/main/res/layout/activity_register_choice.xml" value="0.2" />
         <entry key="..\:/Androiding/ProjectCodes/SleepyDriver/app/src/main/res/layout/activity_setup.xml" value="0.25" />
-        <entry key="..\:/Users/abhis/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_driver_face_detection.xml" value="0.33" />
-        <entry key="..\:/Users/abhis/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/abhis/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/drawable/blue_curve_button.xml" value="0.1155" />
+        <entry key="..\:/Users/abhis/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/drawable/red_curve_button.xml" value="0.1155" />
+        <entry key="..\:/Users/abhis/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/font/comfortaa_bold.xml" value="0.21388888888888888" />
+        <entry key="..\:/Users/abhis/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_driver_face_detection.xml" value="0.25" />
+        <entry key="..\:/Users/abhis/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_main.xml" value="0.75" />
         <entry key="..\:/Users/abhis/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_mode_picker.xml" value="0.25" />
         <entry key="..\:/Users/abhis/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_qrscan.xml" value="0.17074275362318841" />
-        <entry key="..\:/Users/abhis/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_qrshow.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/abhis/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_qrshow.xml" value="0.22" />
         <entry key="..\:/Users/abhis/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_reciever.xml" value="0.1" />
         <entry key="..\:/Users/abhis/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_setup.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/abhis/StudioProjects/SleepyDriver/app/src/main/res/layout/activity_reciever.xml" value="0.16417272338606242" />

@@ -12,12 +12,12 @@ import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,10 +36,10 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import ab.appdev.drivemaster.Configurable;
 import ab.appdev.drivemaster.Information;
-import ab.appdev.drivemaster.QRShowActivity;
 import ab.appdev.drivemaster.R;
 import ab.appdev.drivemaster.DetectionSetupActivity;
 
@@ -63,20 +63,22 @@ public final class DriverFaceDetection extends AppCompatActivity {
     private SharedPreferences sharedpreferences;
 
     private static boolean isNightModeOn = false;
-    static Information information;
+
+    private Button nightButton;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.activity_driver_face_detection);
 
+
+        nightButton = findViewById(R.id.nightModeBTN);
+
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        if (isNightModeOn) {
-            WindowManager.LayoutParams layout = getWindow().getAttributes();
-            layout.screenBrightness = 1F;
-            getWindow().setAttributes(layout);
-        }
+        WindowManager.LayoutParams layout = getWindow().getAttributes();
+        layout.screenBrightness = 1F;
+        getWindow().setAttributes(layout);
 
 
         mPreview = findViewById(R.id.preview);
@@ -108,12 +110,10 @@ public final class DriverFaceDetection extends AppCompatActivity {
             requestCameraPermission();
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!Settings.System.canWrite(this)) {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
-                intent.setData(Uri.parse("package:" + getPackageName()));
-                startActivity(intent);
-            }
+        if (!Settings.System.canWrite(this)) {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+            intent.setData(Uri.parse("package:" + getPackageName()));
+            startActivity(intent);
         }
 
     }
@@ -236,7 +236,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
         if (code != ConnectionResult.SUCCESS) {
             Dialog dlg =
                     GoogleApiAvailability.getInstance().getErrorDialog(this, code, RC_HANDLE_GMS);
-            dlg.show();
+            Objects.requireNonNull(dlg).show();
         }
 
         if (mCameraSource != null) {
@@ -288,7 +288,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
         runOnUiThread(() -> {
             play_media();
 
-            FirebaseDatabase.getInstance().getReference("/" + information.getBroadcastId() + "/").child("INFO").setValue("00000000000000");
+            FirebaseDatabase.getInstance().getReference("/" + Information.getBroadcastId() + "/").child("INFO").setValue("00000000000000");
 
             AlertDialog dig;
             dig = new AlertDialog.Builder(DriverFaceDetection.this)
@@ -310,26 +310,19 @@ public final class DriverFaceDetection extends AppCompatActivity {
 
     public void nightSwitch(View view) {
         isNightModeOn = !isNightModeOn;
-        CamCarder.setVisibility(isNightModeOn ? View.VISIBLE : View.GONE);
-        Toast.makeText(getApplicationContext(), "Night Mode Switched", Toast.LENGTH_SHORT).show();
-
+        CamCarder.setVisibility(isNightModeOn ? View.GONE : View.VISIBLE);
+        Toast.makeText(getApplicationContext(), "Night Mode is " + (isNightModeOn ? "ON" : "OFF"), Toast.LENGTH_SHORT).show();
         Settings.System.putInt(getApplicationContext().getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 255);
 
+        nightButton.setText("Night Mode is " + (isNightModeOn ? "ON" : "OFF"));
 
-    }
-
-    public void showQR(View view) {
-        Intent intent = new Intent(getApplicationContext(), QRShowActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        finishAffinity();
-        startActivity(intent);
-        finish();
     }
 
 
     private class GraphicFaceTrackerFactory implements MultiProcessor.Factory<Face> {
+        @NonNull
         @Override
-        public Tracker<Face> create(Face face) {
+        public Tracker<Face> create(@NonNull Face face) {
             return new GraphicFaceTracker(mGraphicOverlay);
         }
     }
@@ -345,7 +338,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
 
 
         @Override
-        public void onNewItem(int faceId, Face item) {
+        public void onNewItem(int faceId, @NonNull Face item) {
             mFaceGraphic.setId(faceId);
         }
 
@@ -356,7 +349,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
         int c;
 
         @Override
-        public void onUpdate(FaceDetector.Detections<Face> detectionResults, Face face) {
+        public void onUpdate(@NonNull FaceDetector.Detections<Face> detectionResults, @NonNull Face face) {
             mOverlay.add(mFaceGraphic);
             mFaceGraphic.updateFace(face);
             if (flag == 0) {
@@ -365,7 +358,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
         }
 
         @Override
-        public void onMissing(FaceDetector.Detections<Face> detectionResults) {
+        public void onMissing(@NonNull FaceDetector.Detections<Face> detectionResults) {
             mOverlay.remove(mFaceGraphic);
         }
 
@@ -390,9 +383,9 @@ public final class DriverFaceDetection extends AppCompatActivity {
                 }
                 end = start;
                 stop = System.currentTimeMillis();
-            } else if (state_i == 0 && state_f == 0) {
+            } else if (state_i == 0) {
                 begin = System.currentTimeMillis();
-                FirebaseDatabase.getInstance().getReference("/" + information.getBroadcastId() + "/").child("INFO").setValue("" + begin);
+                FirebaseDatabase.getInstance().getReference("/" + Information.getBroadcastId() + "/").child("INFO").setValue("" + begin);
 
                 if (begin - stop > detectionDelay) {
                     c = incrementer();
@@ -412,7 +405,6 @@ public final class DriverFaceDetection extends AppCompatActivity {
 
         finish();
     }
-
 
 
 }
