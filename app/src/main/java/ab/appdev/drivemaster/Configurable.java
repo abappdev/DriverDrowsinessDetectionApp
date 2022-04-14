@@ -14,6 +14,6 @@ public class Configurable {
 
 
     public static int getDetectionDelayInMilliseconds(int value) {
-        return (value + 2) * 150;
+        return (value + 2) * 100;
     }
 }

@@ -311,10 +311,14 @@ public final class DriverFaceDetection extends AppCompatActivity {
     public void nightSwitch(View view) {
         isNightModeOn = !isNightModeOn;
         CamCarder.setVisibility(isNightModeOn ? View.GONE : View.VISIBLE);
-        Toast.makeText(getApplicationContext(), "Night Mode is " + (isNightModeOn ? "ON" : "OFF"), Toast.LENGTH_SHORT).show();
+
         Settings.System.putInt(getApplicationContext().getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 255);
 
         nightButton.setText("Night Mode is " + (isNightModeOn ? "ON" : "OFF"));
+
+        WindowManager.LayoutParams layout = getWindow().getAttributes();
+        layout.screenBrightness = (isNightModeOn ? 1F : 0.5F);
+        getWindow().setAttributes(layout);
 
     }
 
