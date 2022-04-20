@@ -40,6 +40,7 @@ import java.util.Objects;
 
 import ab.appdev.drivemaster.Configurable;
 import ab.appdev.drivemaster.Information;
+import ab.appdev.drivemaster.OnboardingActivity;
 import ab.appdev.drivemaster.R;
 import ab.appdev.drivemaster.DetectionSetupActivity;
 
@@ -323,6 +324,7 @@ public final class DriverFaceDetection extends AppCompatActivity {
     }
 
 
+
     private class GraphicFaceTrackerFactory implements MultiProcessor.Factory<Face> {
         @NonNull
         @Override
@@ -408,6 +410,10 @@ public final class DriverFaceDetection extends AppCompatActivity {
     public void onBackPressed() {
 
         finish();
+    }
+
+    public void onOpenInfo(View view) {
+        startActivity(new Intent(getApplicationContext(), OnboardingActivity.class));
     }
 
 

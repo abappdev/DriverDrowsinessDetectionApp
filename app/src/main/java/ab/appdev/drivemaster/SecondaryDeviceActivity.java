@@ -134,4 +134,8 @@ public class SecondaryDeviceActivity extends AppCompatActivity {
         finish();
     }
 
+    public void onOpenInfo(View view) {
+        startActivity(new Intent(getApplicationContext(), OnboardingActivity.class));
+    }
+
 }

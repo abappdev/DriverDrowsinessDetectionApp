@@ -28,6 +28,9 @@
             android:name=".ModePickerActivity"
             android:exported="false" />
         <activity
+            android:name=".OnboardingActivity"
+            android:exported="false" />
+        <activity
             android:name=".SecondaryDeviceActivity"
             android:exported="false" />
         <activity
