@@ -29,7 +29,8 @@
             android:exported="false" />
         <activity
             android:name=".OnboardingActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.SleepyDriver"/>
         <activity
             android:name=".SecondaryDeviceActivity"
             android:exported="false" />

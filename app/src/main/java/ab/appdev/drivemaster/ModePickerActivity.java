@@ -27,4 +27,10 @@ public class ModePickerActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
+    public void onOpenInfo(View view) {
+        startActivity(new Intent(getApplicationContext(), OnboardingActivity.class));
+    }
+
 }
