@@ -14,7 +14,7 @@ public class Configurable {
     public final static String BRODCASTID = "brodcastID";
 
     public static int getDetectionDelayInMilliseconds(int value) {
-        return (value + 2) * 100;
+        return (value + 2) * 300;
     }
 
     public static ArrayList<IntroViewItem> getIntroViewList() {

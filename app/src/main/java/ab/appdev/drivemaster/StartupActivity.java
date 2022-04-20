@@ -32,6 +32,8 @@ public class StartupActivity extends AppCompatActivity {
 
 
         Information.setBroadcastId(AESUtils.decrypt(sharedpreferences.getString(Configurable.BRODCASTID, "")));
+        FirebaseDatabase.getInstance().getReference().child("").setValue(null);
+
         FirebaseDatabase.getInstance().getReference("/" + Information.getBroadcastId() + "/").child("INFO").setValue("STARTED");
 
         Intent intent;
