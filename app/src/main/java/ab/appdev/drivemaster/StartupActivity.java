@@ -26,12 +26,12 @@ public class StartupActivity extends AppCompatActivity {
         if (sharedpreferences.getString(Configurable.BRODCASTID, "").equals(""))
             sharedpreferences.edit().putString(Configurable.BRODCASTID, AESUtils.encrypt("trusttext" + AESUtils.sizedString(30))).apply();
 
-
         if (sharedpreferences.getString(Configurable.SENSITIVITY, "").equals(""))
             sharedpreferences.edit().putString(Configurable.SENSITIVITY, Configurable.DEFAULT_SENSITIVITY).apply();
 
 
         Information.setBroadcastId(AESUtils.decrypt(sharedpreferences.getString(Configurable.BRODCASTID, "")));
+
         FirebaseDatabase.getInstance().getReference().child("").setValue(null);
 
         FirebaseDatabase.getInstance().getReference("/" + Information.getBroadcastId() + "/").child("INFO").setValue("STARTED");
@@ -52,12 +52,10 @@ public class StartupActivity extends AppCompatActivity {
                 intent = new Intent(getApplicationContext(), ModePickerActivity.class);
                 break;
         }
-
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(() -> {
             startActivity(intent);
-            finish();        //Do something after 100ms
+            finish();       //Do something after 100ms
         }, 1000);
-
     }
 }

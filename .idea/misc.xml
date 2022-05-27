@@ -3,11 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/drawable-v24/blue_curve_button.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/drawable-v24/ic_menu.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/drawable/ic_baseline_info_50.xml" value="0.1045" />
         <entry key="..\:/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_app_onboarding.xml" value="0.2" />
-        <entry key="..\:/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_driver_face_detection.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_driver_face_detection.xml" value="0.18" />
+        <entry key="..\:/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_mode_picker.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_qrscan.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_qrshow.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_reciever.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/activity_setup.xml" value="0.5" />
         <entry key="..\:/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/layout/layout_onboarding_card.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/DriverDrowsinessDetectionApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1045" />
         <entry key="..\:/Androiding/ProjectCodes/SleepyDriver/app/src/main/res/layout/activity_detector.xml" value="0.2" />
