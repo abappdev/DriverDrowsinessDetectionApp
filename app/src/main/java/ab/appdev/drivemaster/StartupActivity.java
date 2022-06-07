@@ -8,9 +8,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.database.FirebaseDatabase;
-
 import ab.appdev.drivemaster.facedetection.DriverFaceDetection;
 
 public class StartupActivity extends AppCompatActivity {
@@ -23,9 +21,10 @@ public class StartupActivity extends AppCompatActivity {
 
         SharedPreferences sharedpreferences = getSharedPreferences(Configurable.SHAREDNAME, Context.MODE_PRIVATE);
 
-        if (sharedpreferences.getString(Configurable.BRODCASTID, "").equals(""))
-            sharedpreferences.edit().putString(Configurable.BRODCASTID, AESUtils.encrypt("trusttext" + AESUtils.sizedString(30))).apply();
 
+        if (sharedpreferences.getString(Configurable.BRODCASTID, "").equals(""))
+            sharedpreferences.edit().putString(Configurable.BRODCASTID,  AESUtils.encrypt("trusttext" + AESUtils.sizedString(30))).apply();
+                                                                                                            //    trusttextuhrguijbcd
         if (sharedpreferences.getString(Configurable.SENSITIVITY, "").equals(""))
             sharedpreferences.edit().putString(Configurable.SENSITIVITY, Configurable.DEFAULT_SENSITIVITY).apply();
 
@@ -33,7 +32,6 @@ public class StartupActivity extends AppCompatActivity {
         Information.setBroadcastId(AESUtils.decrypt(sharedpreferences.getString(Configurable.BRODCASTID, "")));
 
         FirebaseDatabase.getInstance().getReference().child("").setValue(null);
-
         FirebaseDatabase.getInstance().getReference("/" + Information.getBroadcastId() + "/").child("INFO").setValue("STARTED");
 
         Intent intent;

@@ -14,14 +14,14 @@ public class ModePickerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mode_picker);
     }
 
-    public void qrShowOpen(View view) {
+    public void qrShowOpen(View view) { //car
         Intent intent = new Intent(getApplicationContext(), QRShowActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }
 
-    public void qrScanOpen(View view) {
+    public void qrScanOpen(View view) { //personal
         Intent intent = new Intent(getApplicationContext(), QRScanActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
@@ -31,6 +31,7 @@ public class ModePickerActivity extends AppCompatActivity {
 
     public void onOpenInfo(View view) {
         startActivity(new Intent(getApplicationContext(), OnboardingActivity.class));
+
     }
 
 }

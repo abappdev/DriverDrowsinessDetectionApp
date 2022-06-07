@@ -27,13 +27,13 @@ import java.util.Objects;
 public class QRScanActivity extends AppCompatActivity {
 
     private SharedPreferences sharedpreferences;
-
     private ScannerLiveView camera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrscan);
+
         sharedpreferences = getSharedPreferences(Configurable.SHAREDNAME, Context.MODE_PRIVATE);
 
         if (checkPermission()) {
@@ -44,6 +44,7 @@ public class QRScanActivity extends AppCompatActivity {
         }
 
         // initialize scannerLiveview and textview.
+
         camera = (ScannerLiveView) findViewById(R.id.camview);
 
         camera.setScannerViewEventListener(new ScannerLiveView.ScannerViewEventListener() {
@@ -126,6 +127,7 @@ public class QRScanActivity extends AppCompatActivity {
         int camera_permission = ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA);
         int vibrate_permission = ContextCompat.checkSelfPermission(getApplicationContext(), VIBRATE);
         return camera_permission == PackageManager.PERMISSION_GRANTED && vibrate_permission == PackageManager.PERMISSION_GRANTED;
+
     }
 
 
@@ -166,7 +168,10 @@ public class QRScanActivity extends AppCompatActivity {
         builder.setPositiveButton("YES", (dialog, which) -> {
             sharedpreferences.edit().putString(Configurable.APPMODE, "RECEIVER").apply();
             sharedpreferences.edit().putString(Configurable.BRODCASTID, data).apply();
-            Information.setBroadcastId(AESUtils.decrypt(sharedpreferences.getString(Configurable.BRODCASTID, "")));
+
+            Information.setBroadcastId(
+                    AESUtils.decrypt(sharedpreferences.getString(Configurable.BRODCASTID, "")));
+
             dialog.dismiss();
 
             Intent intent = new Intent(getApplicationContext(), StartupActivity.class);

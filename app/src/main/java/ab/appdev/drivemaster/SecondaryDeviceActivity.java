@@ -22,10 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Objects;
 
 public class SecondaryDeviceActivity extends AppCompatActivity {
-    FirebaseDatabase firebaseDatabase;
 
-    // creating a variable for our
-    // Database Reference for Firebase.
+    FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     TextView info;
     SharedPreferences sharedpreferences;
@@ -34,24 +32,25 @@ public class SecondaryDeviceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reciever);
+
+
         info = findViewById(R.id.info);
 
         sharedpreferences = getSharedPreferences(Configurable.SHAREDNAME, Context.MODE_PRIVATE);
+
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         // below line is used to get
         // reference for our database.
         databaseReference = firebaseDatabase.getReference("/" + Information.getBroadcastId() + "/");
+
         info.setText("Hello");
 
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-
                 try {
-
                     switch (Objects.requireNonNull(snapshot.child("INFO").getValue()).toString()) {
                         case "00000000000000":
                             info.setText("WARNING");
@@ -68,11 +67,6 @@ public class SecondaryDeviceActivity extends AppCompatActivity {
                     Toast.makeText(SecondaryDeviceActivity.this, "Fail to get data.", Toast.LENGTH_SHORT).show();
 
                 }
-
-                // after getting the value we are setting
-                // our value to our text view in below line.
-
-
             }
 
             @Override
@@ -122,10 +116,11 @@ public class SecondaryDeviceActivity extends AppCompatActivity {
         });
 
 
+
     }
 
     public void deRegister(View view) {
-        //  sharedpreferences.edit().putString("BroadcastID", AESUtils.encrypt("trusttext" + AESUtils.sizedString(30))).apply();
+//        sharedpreferences.edit().putString("BroadcastID", AESUtils.encrypt("trusttext" + AESUtils.sizedString(30))).apply();
         sharedpreferences.edit().putString(Configurable.APPMODE, "").apply();
         Intent intent = new Intent(getApplicationContext(), StartupActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

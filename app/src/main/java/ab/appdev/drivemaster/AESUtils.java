@@ -19,7 +19,7 @@ public class AESUtils {
     public static void setKey()
     {
 
-        String myKey ="AlibabaEkkeChalisChor";
+        String myKey ="uhfkILTUCSDGYB3RhudvhuNI3F1NidvtdsqIUKFUHHIFOernET8734kinveenono";
 
         MessageDigest sha = null;
         try {
@@ -36,6 +36,7 @@ public class AESUtils {
 
     public static String encrypt(String strToEncrypt )
     {
+//        "uhfknlervnlnvlrnernkinveenono"
         try
         {
             setKey();

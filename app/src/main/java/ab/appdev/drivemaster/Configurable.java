@@ -9,7 +9,7 @@ public class Configurable {
     public final static String SHAREDNAME = "eyesenseData";
     public final static String APPMODE = "APPMODE";
     public final static String RECEIVER = "RECEIVER";
-    public final static String SENDER = "SENDER";
+    public final static String SENDER = "SENDER" ;
     public final static String BRODCASTID = "brodcastID";
 
     public static int getDetectionDelayInMilliseconds(int value) {
